@@ -21,19 +21,17 @@ def main():
     args = parser.parse_args();
     #create a client
     client = openai_client(api_key);
-    user_prompt = "Why is Boot.dev such a great place to learn backend development? Use one paragraph maximum"
-    #print the prompt tokens and response tokens
 
+    #print the prompt tokens and response tokens
+    messages = [
+        {"role": "user", "content": args.user_prompt}
+    ]
 
     #get response from the model
     response = client.chat.completions.create(
         model = "openrouter/free",
-        messages=[
-            {
-                "role": "user",
-                "content": args.user_prompt,
-            }
-        ],
+        messages=messages,
+
     )
     prompt_tokens = response.usage.prompt_tokens;
     completion_tokens = response.usage.completion_tokens;
