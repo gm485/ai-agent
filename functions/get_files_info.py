@@ -1,0 +1,33 @@
+import os
+from multiprocessing import Value
+
+
+def get_files_info(working_directory: str, directory: str = ".") -> str:
+    try:
+        working_dir_abs = os.path.abspath(working_directory);
+        target_dir = os.path.normpath(os.path.join(working_dir_abs, directory));
+
+        if os.path.commonpath([working_dir_abs, target_dir]) != working_dir_abs:
+            return f'Error: Cannot list "{directory}" as it is outside the permitted working directory';
+        if not os.path.isdir(target_dir):
+            return f'Error: "{directory}" is not a directory';
+
+        #loop over each item in target directory
+        try:
+            dir_lines = os.listdir(target_dir);
+            lines = [];
+
+            for item in dir_lines:
+                full_path = os.path.join(target_dir, item)
+                lines.append(f'- {item}: file_size={os.path.getsize(full_path)}, is_dir={os.path.isdir(full_path)}');
+            list_dir_items = "\n".join(lines);
+            print(list_dir_items);
+
+        except Exception as e:
+            return f'Error:  {e}';
+
+        return f'Success: "{directory}" is within the working directory';
+
+
+    except Exception as e:
+        return f'Error: {e}';

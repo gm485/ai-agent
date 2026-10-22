@@ -17,7 +17,8 @@ def main():
 
     #gather user input
     parser = argparse.ArgumentParser(description="ChatBot");
-    parser.add_argument("user_prompt", type=str, help="user prompt")
+    parser.add_argument("user_prompt", type=str, help="user prompt");
+    parser.add_argument("--verbose", action="store_true", help="enable verbose output");
     args = parser.parse_args();
     #create a client
     client = openai_client(api_key);
@@ -31,16 +32,17 @@ def main():
     response = client.chat.completions.create(
         model = "openrouter/free",
         messages=messages,
-
     )
+
     prompt_tokens = response.usage.prompt_tokens;
     completion_tokens = response.usage.completion_tokens;
-    print("User prompt", args.user_prompt)
-    print("Prompt tokens: ", prompt_tokens)
-    print("Response tokens: ", completion_tokens)
-    print("Response:\n", response.choices[0].message.content)
-
-
+    if args.verbose:
+        print("User prompt: ", args.user_prompt)
+        print("Prompt tokens: ", prompt_tokens)
+        print("Response:\n", response.choices[0].message.content)
+        print("Response tokens: ", completion_tokens)
+    else:
+        print("Response:\n", response.choices[0].message.content)
 
 
 
