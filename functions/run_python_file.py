@@ -40,3 +40,22 @@ def run_python_file(
 
     except Exception as e:
         return f'Error executing python file: {e}'
+
+schema_run_python_file = {
+    "type": "function",
+    "function": {
+        "name": "run_python_file",
+        "description": "run a file, but the file must end in .py. must be a python script file",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "run_python_file": {
+                    "type": "string",
+                    "properties": "takes args argument and file path of the file",
+                    "required": "arguments is required for this run command",
+                    "description": "run a python shell script file",
+                },
+            },
+        },
+    },
+}

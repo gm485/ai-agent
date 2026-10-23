@@ -24,3 +24,22 @@ def get_file_content(working_directory: str, file_path: str) -> str:
 
     except Exception as e:
         return f'Error: {e}';
+
+schema_get_file_content = {
+    "type": "function",
+    "function": {
+        "name": "get_file_content",
+        "description": "list file contents inside a file if it goes past the max chars variable the output will truncate what was missing from the original output.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "get_file_content": {
+                    "type": "string",
+                    "description": "string output of what is inside a file similar to the cat command on UNIX systems.",
+                },
+
+
+            },
+        },
+    },
+}
