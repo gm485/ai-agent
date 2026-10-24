@@ -33,10 +33,13 @@ schema_get_file_content = {
         "parameters": {
             "type": "object",
             "properties": {
-                "get_file_content": {
+                "working directory": {
                     "type": "string",
-                    "description": "string output of what is inside a file similar to the cat command on UNIX systems.",
+                    "description": "working directory to look in",
                 },
+                "file path": {
+                    "description": "the file path of the file to read"
+                }
 
 
             },

@@ -5,7 +5,7 @@ from functions.openai import openai_client;
 import os;
 import json;
 from dotenv import load_dotenv;
-from functions.call_functions import available_functions;
+from functions.call_functions import available_functions, call_function;
 
 
 def main():
@@ -38,25 +38,16 @@ def main():
         tools=available_functions,
     )
 
-    #grab the message
-    message = response.choices[0].message;
+    message = response.choices[0].message
     if message.tool_calls is not None:
+    #grab the message
         for tool_call in message.tool_calls:
-            function_args = json.loads(tool_call.function.arguments or "{}");
-            print(f"Calling function: {tool_call.function.name}({function_args})")
+            result_message = call_function(tool_call, verbose=args.verbose)
 
-
-    prompt_tokens = response.usage.prompt_tokens;
-    completion_tokens = response.usage.completion_tokens;
-    if args.verbose:
-        print("User prompt: ", args.user_prompt)
-        print("Prompt tokens: ", prompt_tokens)
-        print("Response:\n", response.choices[0].message.content)
-        print("Response tokens: ", completion_tokens)
-    else:
-        print("Response:\n", response.choices[0].message.content)
-
-
+            if result_message["content"] is None:
+                raise Exception("error: content is empty on result message")
+            if args.verbose:
+                print(f"-> {result_message['content']}")
 
 if __name__ == "__main__":
     main()

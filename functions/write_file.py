@@ -27,13 +27,21 @@ schema_write_file = {
         "parameters": {
             "type": "object",
             "properties": {
-                "write_file": {
+                "working_directory": {
                     "type": "string",
-                    "properties": "takes args argument of the directory and file path of the file",
-                    "required": "arguments is required for this write command",
-                    "description": "writes to file on the file system.",
+                    "description": "working directory for writing files",
                 },
+                "file_path": {
+                    "type": "string",
+                "description": "the file path to write the file to",
+                },
+                "content": {
+                    "type": "string",
+                "description": "the content of the file to write to the filesystem"
+                }
             },
+
+
         },
     },
 }

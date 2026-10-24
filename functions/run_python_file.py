@@ -1,5 +1,6 @@
 import os
-import subprocess;
+import subprocess
+
 
 def run_python_file(
     working_directory: str, file_path: str, args: list[str] | None = None
@@ -49,12 +50,14 @@ schema_run_python_file = {
         "parameters": {
             "type": "object",
             "properties": {
-                "run_python_file": {
+                "file_path": {
                     "type": "string",
-                    "properties": "takes args argument and file path of the file",
-                    "required": "arguments is required for this run command",
-                    "description": "run a python shell script file",
+                    "description": "runs a file that ends with .py",
                 },
+                "argument": {
+                    "type": "string",
+                    "description": "argument for input into the file or function that the file can run"
+                }
             },
         },
     },

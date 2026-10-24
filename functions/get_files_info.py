@@ -39,10 +39,12 @@ schema_get_files_info = {
         "parameters": {
             "type": "object",
             "properties": {
-                "directory": {
+                "working_directory": {
                     "type": "string",
                     "description": "Directory path to list files from, relative to the working directory (default is the working directory itself)",
                 },
+                "directory": "string",
+                "description": "the directory to look for the files"
             },
         },
     },
