@@ -1,6 +1,5 @@
 import os
 
-
 def get_files_info(working_directory: str, directory: str = ".") -> str:
     try:
         working_dir_abs = os.path.abspath(working_directory);
@@ -42,10 +41,13 @@ schema_get_files_info = {
                 "working_directory": {
                     "type": "string",
                     "description": "Directory path to list files from, relative to the working directory (default is the working directory itself)",
+                    },
+                "directory":{
+                    "type": "string",
+                    "description": "the directory to look for files in and print them to the console"
+                    }
                 },
-                "directory": "string",
-                "description": "the directory to look for the files"
+
             },
         },
-    },
-}
+    } # schema ends here
